@@ -8,3 +8,14 @@
 5. Locked position (and mechanism?) for during launch and when the print is finished. 
 
 (optional)6. If necessary due to pinout or memory, separate arduinos can be used for different systems and the clocks can be synced.
+
+
+
+
+
+One method for creating our images for the screen could be as follows...
+  - https://formlabs.com/blog/open-source-dlp-slicer/
+  - convert .png to .c or .raw using http://www.rinkydinkelectronics.com/t_imageconverter565.php to make it compatible with UTFT library
+  - upload to SD card and index through it in the program
+  
+  - alternatively, use slic3r to create svg image, convert to png and follow same procedure.
