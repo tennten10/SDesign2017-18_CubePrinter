@@ -15,7 +15,7 @@
 #define MISO 12 // SPI master-in-slave-out pin
 #define SCLK 13 // SPI data clock pin
 
-#define example A0
+#define LED A0 // to led driver pwm for brightness
 #define example A1
 #define example A2
 #define example A3
