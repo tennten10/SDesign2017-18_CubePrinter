@@ -120,23 +120,30 @@ void Print(){
       }while(digitalRead(SENS1 != HIGH));
     }
   //load image on LCD
+  digitalWrite(SEQ_CNTRL, HIGH);
   //wait for confirmation that it is loaded
+  do{
+    delayMicroseconds(50);
+  }while(digitalRead(SEQ_FDBK)!= LOW);
+  digitalWrite(SEQ_CNTRL, LOW);
   //set printbed for base layer. 
   MOVE(BASE_LAYER_HEIGHT); //be careful about direction. Test when set up ****
   LED(BASE_LED_TIME);
   MOVE(LAYER_HEIGHT);
-  //listen for confirmation from other Arduino that next layer exists. 
-  do{delay(100);}while(true); //all placeholders right now
   //Tell it to change image 
   //putting this inside loop
   do{
+    
+    digitalWrite(SEQ_CNTRL, HIGH); //loads next image
+    do{
+      delayMicroseconds(75); //delays so Nano2 has time to change SEQ_FDBK to HIGH in response to CNTRL
+    }while(digitalRead(SEQ_FDBK)!= LOW); //confirmation that it is loaded
+    digitalWrite(SEQ_CNTRL, LOW); //resets interupt control pin
     LED(BASE_LED_TIME);
-    MOVE(LAYER_HEIGHT);
-    //tell to change image
-    digitalWrite(SEQ_CNTRL, HIGH);
-  }while(true /*next image exists*/);
+    MOVE(LAYER_HEIGHT);    
+  }while(digitalRead(SEQ_LAYER) == LOW); //next image exists
   
-  }
+}
 
 //************************************************************************//
 void Standby(){} //set parameters to power saving mode. 
@@ -157,3 +164,5 @@ void MOVE(float dist){ //move print bed input distance "dist" in um. Negative nu
   int dist1 = dist/0.1;
   st1.step(dist1);
 }
+//************************************************************************//
+void FinalStandby(){}
