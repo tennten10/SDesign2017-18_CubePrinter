@@ -1,3 +1,9 @@
+
+// This code not used with 2 arduinos. Each has its own code in their respective folders. 
+
+
+
+
 // LCD function modified from Demo_Landscape example on RinkyDinkElectronics.com
 
 #include <UTFT.h> // make sure the libraries are installed on the computer that the code is being run on. 
