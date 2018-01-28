@@ -66,7 +66,6 @@ void PotRead(){
   duration = (int)potVoltage * 4750.0/1023.0 + 250.0;
   if (duration >= 1000){
     timeDisplay.setNumber(duration/10, 2);
-    decimalPlace = 2;
   }else {
       timeDisplay.setNumber(duration, 0);
   }
